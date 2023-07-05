@@ -1,0 +1,1 @@
+{"users":[{"id":"0","name":"Егор Петров Михайлович","password":"A1b2y7-300","role":"admin","isAuth":false},{"id":"1","name":"Тест Тестов Тестович","password":"123","role":"user","isAuth":false},{"id":"2","name":"test","password":"123","role":"user","isAuth":false},{"id":"3","name":"test1","password":"123","role":"user","isAuth":false}]}

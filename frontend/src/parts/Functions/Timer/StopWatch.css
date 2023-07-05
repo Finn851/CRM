@@ -1,0 +1,13 @@
+.stop-watch {
+    height: 100%;
+    width: max-content;
+    background-color: #fff;
+    padding: 100px 40px;
+    -webkit-box-shadow: 4px 4px 35px 0px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: 4px 4px 35px 0px rgba(34, 60, 80, 0.2);
+    box-shadow: 4px 4px 35px 0px rgba(34, 60, 80, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
