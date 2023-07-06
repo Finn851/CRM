@@ -1,9 +1,27 @@
 import { useEffect, useState } from "react";
+import { ToastContainer, toast } from 'react-toastify';
+
 
 const CreateStage = (props) => {
 
     const [formStageSubmitted, setFormStageSubmitted] = useState(false);
     const [stageName, setStageName] = useState(null)
+
+    const getCurrentTime = () => {
+        const date = new Date();
+        const hours = date.getHours().toString().padStart(2, '0');
+        const minutes = date.getMinutes().toString().padStart(2, '0');
+        const seconds = date.getSeconds().toString().padStart(2, '0');
+        return `${hours}:${minutes}:${seconds}`;
+    };
+    
+    const getCurrentDate = () => {
+        const date = new Date();
+        const day = date.getDate().toString().padStart(2, '0');
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const year = date.getFullYear().toString().slice(-2);
+        return `${day}.${month}.${year}`;
+    };
 
     function getRandomColor() {
         let letters = '0123456789ABCDEF';
@@ -21,9 +39,13 @@ const CreateStage = (props) => {
     function postStage(e){
         e.preventDefault();
         const formData = new URLSearchParams();
+        var date = new Date();
         formData.append('stageName', stageName)
         formData.append('stageColor', getRandomColor())
-    
+        formData.append('stageNotificationText', 'Создан этап')
+        formData.append('stageNotificationDate', getCurrentTime() + ' ' + getCurrentDate())
+        formData.append('userID', localStorage.getItem('userID'))
+
         fetch('/dashboard/postStage', {
           method: 'POST',
           headers: {
@@ -38,6 +60,8 @@ const CreateStage = (props) => {
         .catch(error => {
           console.error(error);
         });
+
+        toast.info('Создан этап')
       }
     useEffect(() => {
         if (formStageSubmitted) {

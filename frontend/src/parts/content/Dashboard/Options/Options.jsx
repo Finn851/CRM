@@ -9,7 +9,7 @@ const Options = (props) => {
                 <option selected value="new">Самые новые</option>
                 <option value="price">По цене</option>
             </select>
-            <CreateStage rerender={props.rerender} />
+            <CreateStage rerender={props.rerender} user={props.user}/>
             <CreateDeal stages={props.stages} rerender={props.rerender} />
         </div>
     )

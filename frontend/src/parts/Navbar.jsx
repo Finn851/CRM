@@ -1,12 +1,13 @@
 import { NavLink } from 'react-router-dom';
 import styles from './Navbar.module.css'
-import { Routes, Route} from 'react-router-dom';
+import { Routes, Route, useNavigate} from 'react-router-dom';
 import Dashboard from './content/Dashboard/Dashboard';
 import Revenue from './content/Revenue/Revenue';
 import Main from './content/Main/Main'
-import Login from './content/Login/Login';
-import { useNavigate } from 'react-router-dom';
-import { useState, useEffect } from "react"
+import Notifications from './content/Notifications/Notifications';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Loading from './content/Loading/Loading';
 
 const Navbar = ({ rerender, data, users, handleLogout}) => {
 
@@ -21,9 +22,9 @@ const Navbar = ({ rerender, data, users, handleLogout}) => {
         navigate('/');
     };
 
-    if (users === null) {
+    if (users == null || data === null) {
         return(
-            <div>Loading...</div>
+            <Loading />
         )
     } else {
         const User = users.find(el => el.id === localStorage.getItem('userID'))
@@ -56,12 +57,12 @@ const Navbar = ({ rerender, data, users, handleLogout}) => {
                                     <span className={styles.link}>Revenue</span>
                                 </a>
                             </NavLink>
-                            <li className={styles.list}>
+                            <NavLink to="/notifications" className={styles.list}>
                                 <a href="#" className={styles.nav__link}>
                                     <i className="bx bx-bell icon"></i>
                                     <span className={styles.link}>Notifications</span>
                                 </a>
-                            </li>
+                            </NavLink>
                             <li className={styles.list}>
                                 <a href="#" className={styles.nav__link}>
                                     <i className="bx bx-message-rounded icon"></i>
@@ -112,7 +113,9 @@ const Navbar = ({ rerender, data, users, handleLogout}) => {
                         <Route path='/' element={<Main state={rerender} data={data} users={users} user={User}/>} />
                         <Route path='/dashboard' element={<Dashboard rerender={rerender} data={data} users={users} user={User}/>} />
                         <Route path='/revenue' element={<Revenue />} />
+                        <Route path='/notifications' element={<Notifications rerender={rerender} data={data} users={users} user={User}/>}/>
                     </Routes>
+                    <ToastContainer className={styles.toast}/>
                 </div>
             </section>
         </div>

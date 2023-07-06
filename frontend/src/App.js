@@ -1,7 +1,6 @@
 import './App.css';
 import Navbar from './parts/Navbar';
 import { useEffect, useState } from 'react';
-import Login from './parts/content/Login/Login';
 
 const App = (props) => {
   const [data, setData] = useState(null)

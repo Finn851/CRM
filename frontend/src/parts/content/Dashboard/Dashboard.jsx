@@ -4,6 +4,7 @@ import axios from 'axios'
 import Options from './Options/Options'
 
 const Dashboard = (props) => {
+
   const Stages = props.data;
 
   const [stages, setStages] = useState(Stages)
@@ -77,7 +78,7 @@ const Dashboard = (props) => {
 
   return (
     <div className={styles.dashboard__wrapper}>
-      <Options stages={Stages} rerender={props.rerender}/>
+      <Options stages={Stages} rerender={props.rerender} user={props.user}/>
       <div className={styles.dashboard__stages}>
         {stages.map(stage => <div className={styles.dashboard__stage}
           onDragOver={(e) => dragOverHandler(e)}

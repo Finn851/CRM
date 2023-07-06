@@ -10,6 +10,22 @@ const CreateDeal = (props) => {
 
     const [formDealSubmitted, setFormDealSubmitted] = useState(false);
 
+    const getCurrentTime = () => {
+        const date = new Date();
+        const hours = date.getHours().toString().padStart(2, '0');
+        const minutes = date.getMinutes().toString().padStart(2, '0');
+        const seconds = date.getSeconds().toString().padStart(2, '0');
+        return `${hours}:${minutes}:${seconds}`;
+    };
+    
+    const getCurrentDate = () => {
+        const date = new Date();
+        const day = date.getDate().toString().padStart(2, '0');
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const year = date.getFullYear().toString().slice(-2);
+        return `${day}.${month}.${year}`;
+    };
+
     function dealNameChange(ev) {
         setDealName(ev.target.value);
     }
@@ -26,7 +42,9 @@ const CreateDeal = (props) => {
         formData.append('dealName', dealName)
         formData.append('dealPrice', dealPrice)
         formData.append('dealStage', dealStage)
-
+        formData.append('stageNotificationText', 'Создана сделка')
+        formData.append('stageNotificationDate', getCurrentTime() + ' ' + getCurrentDate())
+        formData.append('userID', localStorage.getItem('userID'))
 
         fetch('/dashboard/postDeal', {
             method: 'POST',

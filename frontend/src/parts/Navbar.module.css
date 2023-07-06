@@ -107,3 +107,7 @@ nav.open ~ .overlay {
 .auth__name{
   margin-right: 20px;
 }
+
+.toast{
+  z-index: 10000000 !important;
+}
