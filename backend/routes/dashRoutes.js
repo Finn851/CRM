@@ -1,20 +1,21 @@
 const {Router} = require('express')
 const router = Router()
+const data = require('../data/data.json');
 const fs = require('fs')
 const path = require('path')
 const { v4: uuidv4 } = require('uuid');
-const data = require('../data/data.json');
 const users = require('../data/users.json')
 
-router.get('/api', (req, res) => {
+router.get('/api', async (req, res) => {
     res.json({data: data})
 });
 
 router.post("/", async (req, res) => {
+    const d = {data: JSON.parse(req.body.data)}
     return new Promise((resolve, reject) => {
         fs.writeFile(
             path.join(__dirname, '..', 'data', 'data.json'),
-            JSON.stringify(req.body),
+            JSON.stringify(d),
             (err) => {
                 if (err) {
                     reject(err)

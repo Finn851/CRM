@@ -65,7 +65,7 @@ const CreateStage = (props) => {
       }
     useEffect(() => {
         if (formStageSubmitted) {
-            props.rerender.RerenderEntireTree()
+            props.rerender()
             window.location.reload()
             setFormStageSubmitted(false);
         }

@@ -22,7 +22,7 @@ const Navbar = ({ rerender, data, users, handleLogout}) => {
         navigate('/');
     };
 
-    if (users == null || data === null) {
+    if (users == null || data == null) {
         return(
             <Loading />
         )

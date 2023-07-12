@@ -64,7 +64,7 @@ const CreateDeal = (props) => {
 
     useEffect(() => {
         if (formDealSubmitted) {
-            props.rerender.RerenderEntireTree()
+            props.rerender()
             window.location.reload()
             setFormDealSubmitted(false);
         }

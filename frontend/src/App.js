@@ -8,11 +8,11 @@ const App = (props) => {
   const [auth, setAuth] = useState(null);
 
   const fetchData = () => {
-    fetch('/dashboard/api').then((res) => res.json()).then(res => setData(res.data.data))
+    fetch('http://localhost:3001/dashboard/api').then((res) => res.json()).then(res => setData(res.data.data))
   }
 
   const fetchUsers = () => {
-    fetch('/users').then((res) => res.json()).then(res => setUsers(res.users.users))
+    fetch('http://localhost:3001/users').then((res) => res.json()).then(res => setUsers(res.users.users))
   }
 
   useEffect(() => {
@@ -72,10 +72,11 @@ const App = (props) => {
   };
 
   if (auth) {
+    console.log(data)
     return (
       <div className="App">
-        {data !== null && (
-          <Navbar rerender={props.rerender} data={data} users={users} handleLogout={handleLogout}/>
+        {data && users && (
+          <Navbar rerender={props.rerender} data={data} users={users} handleLogout={handleLogout} />
         )}
       </div>
     );
