@@ -8,6 +8,7 @@ import Notifications from './content/Notifications/Notifications';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Loading from './content/Loading/Loading';
+import Files from './content/Files/Files'
 
 const Navbar = ({ rerender, data, users, handleLogout}) => {
 
@@ -81,12 +82,12 @@ const Navbar = ({ rerender, data, users, handleLogout}) => {
                                     <span className={styles.link}>Likes</span>
                                 </a>
                             </li>
-                            <li className={styles.list}>
+                            <NavLink to="/files" className={styles.list}>
                                 <a href="#" className={styles.nav__link}>
                                     <i className="bx bx-folder-open icon"></i>
                                     <span className={styles.link}>Files</span>
                                 </a>
-                            </li>
+                            </NavLink>
                         </ul>
 
                         <div className={styles.bottom__content}>
@@ -114,6 +115,7 @@ const Navbar = ({ rerender, data, users, handleLogout}) => {
                         <Route path='/dashboard' element={<Dashboard rerender={rerender} data={data} users={users} user={User}/>} />
                         <Route path='/revenue' element={<Revenue />} />
                         <Route path='/notifications' element={<Notifications rerender={rerender} data={data} users={users} user={User}/>}/>
+                        <Route path='/files' element={<Files />} />
                     </Routes>
                     <ToastContainer className={styles.toast}/>
                 </div>

@@ -72,7 +72,6 @@ const App = (props) => {
   };
 
   if (auth) {
-    console.log(data)
     return (
       <div className="App">
         {data && users && (

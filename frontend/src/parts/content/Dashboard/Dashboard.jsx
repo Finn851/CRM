@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import styles from './Dashboard.module.css'
-import axios from 'axios'
 import Options from './Options/Options'
 
 const Dashboard = (props) => {
-
   const Stages = props.data;
 
   const [stages, setStages] = useState(Stages)
@@ -67,9 +65,6 @@ const Dashboard = (props) => {
       body: formData
     })
       .then(response => response.json())
-      .then(data => {
-        console.log(data);
-      })
       .catch(error => {
         console.error(error);
       });
