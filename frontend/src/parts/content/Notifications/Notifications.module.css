@@ -1,3 +1,9 @@
+.notifications{
+    width: 90%;
+    margin: 0 auto;
+    padding-top: 50px;
+}
+
 .notification{
     width: 100%;
     background-color: #fff;

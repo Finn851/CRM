@@ -1,6 +1,7 @@
 import './App.css';
 import Navbar from './parts/Navbar';
 import { useEffect, useState } from 'react';
+import Login from './parts/content/Login/Login';
 
 const App = (props) => {
   const [data, setData] = useState(null)
@@ -82,18 +83,7 @@ const App = (props) => {
   } else {
     return (
       <div className="App">
-        <form onSubmit={handleSubmit}>
-          <h2>Вход</h2>
-          <div>
-            <label htmlFor="name">ФИО:</label>
-            <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} required />
-          </div>
-          <div>
-            <label htmlFor="password">Пароль:</label>
-            <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-          </div>
-          <button type="submit">Войти</button>
-        </form>
+        <Login handleSubmit={handleSubmit} name={name} setName={setName} password={password} setPassword={setPassword}/>
       </div>
     );
   }

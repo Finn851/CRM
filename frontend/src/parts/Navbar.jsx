@@ -9,14 +9,10 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Loading from './content/Loading/Loading';
 import Files from './content/Files/Files'
+import avatar from "../images/profile.jpeg";
 
 const Navbar = ({ rerender, data, users, handleLogout}) => {
-
     const navigate = useNavigate();
-
-    const choiseCross = () =>{
-        document.querySelector("#nav").classList.toggle(styles.open);
-    }
 
     const handleLogoutClick = () => {
         handleLogout()
@@ -30,99 +26,88 @@ const Navbar = ({ rerender, data, users, handleLogout}) => {
     } else {
         const User = users.find(el => el.id === localStorage.getItem('userID'))
         return (
-        <div>
-            <nav id="nav">
-                <div className={styles.logo}>
-                    <i class="bx bx-menu menu-icon" onClick={choiseCross}></i>
-                    <NavLink to="/" className="list">
-                        <span className={styles.logo__name}>Моя оборона</span>
-                    </NavLink>
-                </div>
-                <h1 className={styles.auth__name}>{User.name}</h1>
-                <div className={styles.sidebar}>
-                    <div className={styles.logo}>
-                        <i class="bx bx-menu menu-icon"></i>
-                        <span className={styles.logo__name}>Моя оборона</span>
-                    </div>
-                    <div className={styles.sidebar__content}>
-                        <ul className={styles.lists}>
-                            <NavLink to="/dashboard" className={styles.list}>
-                                <a href="#" className={styles.nav__link}>
-                                    <i className="bx bx-home-alt icon"></i>
-                                    <span className={styles.link}>Dashboard</span>
-                                </a>
-                            </NavLink>
-                            <NavLink to="/revenue" className={styles.list}>
-                                <a href="#" className={styles.nav__link}>
-                                    <i className="bx bx-bar-chart-alt-2 icon"></i>
-                                    <span className={styles.link}>Revenue</span>
-                                </a>
-                            </NavLink>
-                            <NavLink to="/notifications" className={styles.list}>
-                                <a href="#" className={styles.nav__link}>
-                                    <i className="bx bx-bell icon"></i>
-                                    <span className={styles.link}>Notifications</span>
-                                </a>
-                            </NavLink>
-                            <li className={styles.list}>
-                                <a href="#" className={styles.nav__link}>
-                                    <i className="bx bx-message-rounded icon"></i>
-                                    <span className={styles.link}>Messages</span>
-                                </a>
-                            </li>
-                            <li className={styles.list}>
-                                <a href="#" className={styles.nav__link}>
-                                    <i className="bx bx-pie-chart-alt-2 icon"></i>
-                                    <span className={styles.link}>Analytics</span>
-                                </a>
-                            </li>
-                            <li className={styles.list}>
-                                <a href="#" className={styles.nav__link}>
-                                    <i className="bx bx-heart icon"></i>
-                                    <span className={styles.link}>Likes</span>
+            <div>
+                <div class="sidebar">
+                    <ul>
+                        <NavLink className='navlink logo' to="/">
+                            <a href="#">
+                                <span class='icon'><i class='bx bx-shield'></i></span>
+                                <span class="text">Моя оборона</span>
+                            </a>
+                        </NavLink>
+                        <NavLink to="/dashboard" className="navlink">
+                            <a href="#">
+                                <span class='icon'><i class='bx bx-customize'></i></span>
+                                <span class="text">Dashboard</span>
+                            </a>
+                        </NavLink>
+                        <NavLink to="/revenue" className="navlink">
+                            <a href="#">
+                                <span class='icon'><i class='bx bxl-graphql'></i></span>
+                                <span class="text">Revenue</span>
+                            </a>
+                        </NavLink>
+                        <NavLink to="/notifications" className="navlink">
+                            <a href="#">
+                                <span class='icon'><i class='bx bx-bell'></i></span>
+                                <span class="text">Notifications</span>
+                            </a>
+                        </NavLink>
+                        <li className="navlink">
+                            <a href="#">
+                                <span class='icon'><i class='bx bx-chat'></i></span>
+                                <span class="text">Chat</span>
+                            </a>
+                        </li>
+                        <NavLink to="/files" className="navlink">
+                            <a href="#">
+                                <span class='icon'><i class='bx bx-file-blank'></i></span>
+                                <span class="text">Files</span>
+                            </a>
+                        </NavLink>
+                        <div className='bottom'>
+                            <li className="navlink">
+                                <a href="#">
+                                    <span class='icon'><i class='bx bx-cog'></i></span>
+                                    <span class="text">Settings</span>
                                 </a>
                             </li>
-                            <NavLink to="/files" className={styles.list}>
-                                <a href="#" className={styles.nav__link}>
-                                    <i className="bx bx-folder-open icon"></i>
-                                    <span className={styles.link}>Files</span>
-                                </a>
-                            </NavLink>
-                        </ul>
-
-                        <div className={styles.bottom__content}>
-                            <li className={styles.list}>
-                                <a href="#" className={styles.nav__link}>
-                                    <i className="bx bx-cog icon"></i>
-                                    <span className={styles.link}>Settings</span>
-                                </a>
-                            </li>
-                            <li className={styles.list}>
-                                <button onClick={handleLogoutClick} className={styles.nav__link}>
-                                    <i className="bx bx-log-out icon"></i>
-                                    <span className={styles.link}>Logout</span>
-                                </button>
-                            </li>
+                            <div className='profilelog'>
+                                <li className="navlink">
+                                    <a href="#">
+                                        <span class='icon'>
+                                            <div className="imgBx">
+                                                <img src={avatar}/>
+                                            </div>
+                                        </span>
+                                        <span class="text">{User.name}</span>
+                                    </a>
+                                </li>
+                                <li className="navlink">
+                                    <button onClick={handleLogoutClick}>
+                                        <span class='icon'><i class='bx bx-log-out'></i></span>
+                                        <span class="text">Logout</span>
+                                    </button>
+                                </li>
+                            </div>
                         </div>
+                    </ul>
+                </div>
+                <section className="wrapper">
+                    <div className="wrapper__inner">
+                        <Routes>
+                            <Route path='/' element={<Main state={rerender} data={data} users={users} user={User} />} />
+                            <Route path='/dashboard' element={<Dashboard rerender={rerender} data={data} users={users} user={User} />} />
+                            <Route path='/revenue' element={<Revenue />} />
+                            <Route path='/notifications' element={<Notifications rerender={rerender} data={data} users={users} user={User} />} />
+                            <Route path='/files' element={<Files />} />
+                        </Routes>
+                        <ToastContainer className={styles.toast} />
                     </div>
-                </div>
-            </nav>
-            <section className={styles.overlay} onClick={choiseCross}></section>
-            <section className="wrapper">
-                <div className="wrapper__inner">
-                    <Routes>
-                        <Route path='/' element={<Main state={rerender} data={data} users={users} user={User}/>} />
-                        <Route path='/dashboard' element={<Dashboard rerender={rerender} data={data} users={users} user={User}/>} />
-                        <Route path='/revenue' element={<Revenue />} />
-                        <Route path='/notifications' element={<Notifications rerender={rerender} data={data} users={users} user={User}/>}/>
-                        <Route path='/files' element={<Files />} />
-                    </Routes>
-                    <ToastContainer className={styles.toast}/>
-                </div>
-            </section>
-        </div>
+                </section>
+            </div>
     );
-        }
+    }
 }
 
 export default Navbar
