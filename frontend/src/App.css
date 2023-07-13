@@ -62,13 +62,29 @@ body{
   z-index: 1000;
 }
 
+.Control-Buttons{
+  display: none;
+}
+
 .sidebar:hover{
   width: 300px;
+}
+
+.sidebar:hover .Control-Buttons{
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .sidebar ul{
   position: relative;
   height: 100%;
+}
+
+.sidebar ul button{
+  width: 100%;
 }
 
 .sidebar ul .navlink{
@@ -84,12 +100,9 @@ body{
   background: #fff;
 }
 
-.sidebar ul .navlink:hover{
+.sidebar ul button:hover{
   background: #f3f3f3;
-}
-
-.sidebar ul .navlink.logo:hover{
-  background: #fff;
+  cursor: pointer;
 }
 
 .sidebar ul .navlink a{
@@ -121,16 +134,30 @@ body{
   letter-spacing: 0.05em;
 }
 
-.sidebar ul .navlink button{
+.sidebar ul .navlink a .time{
+  position: relative;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  font-size: 1em;
+  color: #333;
+}
+
+.watch{
+  height: 160px;
+}
+
+.sidebar ul button{
   position: relative;
   display: flex;
   white-space: nowrap;
   text-decoration: none;
   border: none;
   background-color: transparent;
+  cursor: pointer;
 }
 
-.sidebar ul .navlink button .icon{
+.sidebar ul button a .icon{
   position: relative;
   display: flex;
   justify-content: center;
@@ -141,7 +168,7 @@ body{
   color: #333;
 }
 
-.sidebar ul .navlink button .text{
+.sidebar ul button a .text{
   position: relative;
   height: 60px;
   display: flex;
@@ -152,7 +179,6 @@ body{
   letter-spacing: 0.05em;
   font-family: 'Poppins', sans-serif;
 }
-
 
 .sidebar ul .navlink.logo{
   margin-bottom: 50px;

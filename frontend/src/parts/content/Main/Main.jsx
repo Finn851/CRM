@@ -110,7 +110,6 @@ const Main = (props) => {
                                     disableButtonsControls />
                             </div>
                         </div>
-                        <StopWatch/>
                     </div>
                     <div className={styles.wrapper__leftdownside}>
                        <Chart1 />

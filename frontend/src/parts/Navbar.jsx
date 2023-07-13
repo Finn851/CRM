@@ -10,6 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Loading from './content/Loading/Loading';
 import Files from './content/Files/Files'
 import avatar from "../images/profile.jpeg";
+import StopWatch from './Functions/Timer/StopWatch';
 
 const Navbar = ({ rerender, data, users, handleLogout}) => {
     const navigate = useNavigate();
@@ -65,6 +66,11 @@ const Navbar = ({ rerender, data, users, handleLogout}) => {
                                 <span class="text">Files</span>
                             </a>
                         </NavLink>
+                        <li className="navlink watch">
+                            <a href="#">
+                                <StopWatch/>
+                            </a>
+                        </li>
                         <div className='bottom'>
                             <li className="navlink">
                                 <a href="#">
@@ -83,12 +89,12 @@ const Navbar = ({ rerender, data, users, handleLogout}) => {
                                         <span class="text">{User.name}</span>
                                     </a>
                                 </li>
-                                <li className="navlink">
-                                    <button onClick={handleLogoutClick}>
+                                <button className="navlink" onClick={handleLogoutClick}>
+                                    <a>
                                         <span class='icon'><i class='bx bx-log-out'></i></span>
                                         <span class="text">Logout</span>
-                                    </button>
-                                </li>
+                                    </a>
+                                </button>
                             </div>
                         </div>
                     </ul>

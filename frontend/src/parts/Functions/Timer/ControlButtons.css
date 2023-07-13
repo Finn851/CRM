@@ -1,11 +1,3 @@
-.Control-Buttons {
-    width: 100%;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
- 
 .btn-grp {
     display: flex;
     align-items: center;
@@ -19,7 +11,7 @@
     height: 5vh;
     border-radius: 14px;
     margin: 0px 6px;
-    margin-top: 20px;
+    margin-top: 11px;
     display: flex;
     border: 2px solid #e42a2a;
     justify-content: center;
