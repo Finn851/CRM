@@ -42,11 +42,11 @@ function StopWatch() {
     let interval = null;
 
     if (isActive && !isPaused) {
-      prevTimestampRef.current = Date.now();
+      prevTimestampRef.current = Date.now() - pausedTime;
       interval = setInterval(() => {
         const currentTimestamp = Date.now();
         const deltaTime = currentTimestamp - prevTimestampRef.current;
-        setElapsedTime((prevElapsedTime) => prevElapsedTime + deltaTime - pauseAccumulatedRef.current);
+        setElapsedTime((prevElapsedTime) => prevElapsedTime + deltaTime);
         prevTimestampRef.current = currentTimestamp;
       }, 10);
     } else {
@@ -56,7 +56,7 @@ function StopWatch() {
     return () => {
       clearInterval(interval);
     };
-  }, [isActive, isPaused]);
+  }, [isActive, isPaused, pausedTime]);
 
   const handleStart = () => {
     setIsActive(true);
@@ -67,8 +67,7 @@ function StopWatch() {
   const handlePauseResume = () => {
     setIsPaused((prevIsPaused) => !prevIsPaused);
     if (!isPaused) {
-      const pauseStart = Date.now();
-      pauseAccumulatedRef.current += pauseStart - prevTimestampRef.current;
+      pauseAccumulatedRef.current = elapsedTime;
     } else {
       prevTimestampRef.current = Date.now();
     }

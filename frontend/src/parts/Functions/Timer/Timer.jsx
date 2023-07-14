@@ -1,29 +1,31 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./Timer.css";
 
-export default function Timer({ time }) {
+export default function Timer({ time, isPaused }) {
   const [displayTime, setDisplayTime] = useState(formatTime(time));
   const prevTimeRef = useRef(time);
-
-
+  const isPausedRef = useRef(isPaused);
 
   useEffect(() => {
-    if (time !== prevTimeRef.current) {
-      setDisplayTime(formatTime(time));
+    if (isPaused) {
+      isPausedRef.current = true;
+    } else {
+      isPausedRef.current = false;
       prevTimeRef.current = time;
+      setDisplayTime(formatTime(time));
     }
-  }, [time]);
+  }, [time, isPaused]);
 
   useEffect(() => {
     let interval = null;
 
-    if (time > 0 && time !== prevTimeRef.current) {
+    if (!isPausedRef.current) {
       interval = setInterval(() => {
-        setDisplayTime((prevDisplayTime) => {
-          const newTime = prevTimeRef.current + 1000;
-          prevTimeRef.current = newTime;
-          return formatTime(newTime);
-        });
+        const currentTimestamp = Date.now();
+        const deltaTime = currentTimestamp - prevTimeRef.current;
+        const newTime = prevTimeRef.current + deltaTime;
+        prevTimeRef.current = currentTimestamp;
+        setDisplayTime(formatTime(newTime));
       }, 1000);
     }
 
