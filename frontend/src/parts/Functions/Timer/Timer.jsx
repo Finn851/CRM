@@ -1,14 +1,43 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./Timer.css";
 
-export default function Timer({ time, isPaused }) {
+export default function Timer({ time, isPaused, user}) {
   const [displayTime, setDisplayTime] = useState(formatTime(time));
   const prevTimeRef = useRef(time);
   const isPausedRef = useRef(isPaused);
 
+  const getCurrentDate = () => {
+    const date = new Date();
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear().toString().slice(-2);
+    return `${day}.${month}.${year}`;
+  };
+
+  function postTime(time){
+    const formData = new URLSearchParams();
+    formData.append('time', time)
+    formData.append('userID', user.id)
+    formData.append('date', getCurrentDate())
+    fetch('/timer', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: formData
+    })
+      .then(response => response.json())
+      .catch(error => {
+        console.error(error);
+      });
+  }
+
   useEffect(() => {
     if (isPaused) {
       isPausedRef.current = true;
+      if(displayTime !== '00:00:00'){
+        postTime(displayTime)
+      }
     } else {
       isPausedRef.current = false;
       prevTimeRef.current = time;
@@ -45,5 +74,9 @@ export default function Timer({ time, isPaused }) {
     )}`;
   }
 
-  return <div className="timer">{displayTime}</div>;
+  const hours = displayTime.split(':')[0]
+  const minutes = displayTime.split(':')[1]
+  const seconds = displayTime.split(':')[2]
+
+  return <div className="timer"><span>{hours}</span>:<span>{minutes}</span>:<span>{seconds}</span></div>;
 }

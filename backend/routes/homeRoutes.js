@@ -45,6 +45,27 @@ router.post('/login', (req, res) => {
     }
 });
 
+router.post('/timer', (req, res) => {
+  const {time, userID, date} = req.body
+  const User = users.users.find(user => user.id === userID);
+  User.sessions.unshift({date, time})
+  let d = users
+  d.users.forEach(el => {
+    if(el.id === User.id){
+      el = User
+    }
+  });
+  fs.writeFile(
+    path.join(__dirname, '..', 'data', 'users.json'),
+    JSON.stringify(d),
+    (err) => {
+      if (err) {
+        console.log(err)
+      }
+    }
+  )
+})
+
 router.post('/logout', (req,res) => {
   const {userID, isAuth} = req.body
   let d = users

@@ -27,7 +27,7 @@ const Navbar = ({ rerender, data, users, handleLogout}) => {
     } else {
         const User = users.find(el => el.id === localStorage.getItem('userID'))
         return (
-            <div>
+            <div className='navnavbar'>
                 <div class="sidebar">
                     <ul>
                         <NavLink className='navlink logo' to="/">
@@ -36,7 +36,7 @@ const Navbar = ({ rerender, data, users, handleLogout}) => {
                                 <span class="text">Моя оборона</span>
                             </a>
                         </NavLink>
-                        <NavLink to="/dashboard" className="navlink">
+                        <NavLink to={`/dashboard/${localStorage.getItem('selectedOption')}`} className="navlink">
                             <a href="#">
                                 <span class='icon'><i class='bx bx-customize'></i></span>
                                 <span class="text">Dashboard</span>
@@ -66,12 +66,12 @@ const Navbar = ({ rerender, data, users, handleLogout}) => {
                                 <span class="text">Files</span>
                             </a>
                         </NavLink>
-                        <li className="navlink watch">
-                            <a href="#">
-                                <StopWatch/>
-                            </a>
-                        </li>
                         <div className='bottom'>
+                            <li className="navlink watch">
+                                <a href="#">
+                                    <StopWatch rerender={rerender} user={User}/>
+                                </a>
+                            </li>
                             <li className="navlink">
                                 <a href="#">
                                     <span class='icon'><i class='bx bx-cog'></i></span>
@@ -103,7 +103,7 @@ const Navbar = ({ rerender, data, users, handleLogout}) => {
                     <div className="wrapper__inner">
                         <Routes>
                             <Route path='/' element={<Main state={rerender} data={data} users={users} user={User} />} />
-                            <Route path='/dashboard' element={<Dashboard rerender={rerender} data={data} users={users} user={User} />} />
+                            <Route path={`/dashboard/*`} element={<Dashboard rerender={rerender} data={data} users={users} user={User} selectedOption={localStorage.getItem('selectedOption')}/>} />
                             <Route path='/revenue' element={<Revenue />} />
                             <Route path='/notifications' element={<Notifications rerender={rerender} data={data} users={users} user={User} />} />
                             <Route path='/files' element={<Files />} />

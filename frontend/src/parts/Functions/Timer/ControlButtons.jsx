@@ -5,18 +5,14 @@ export default function ControlButtons(props) {
     const StartButton = (
         <div className="btn btn-one btn-start"
             onClick={props.handleStart}>
-            Начать работу
+            Начать новый рабочий день
         </div>
     );
     const ActiveButtons = (
         <div className="btn-grp">
             <div className="btn btn-two"
                 onClick={props.handleReset}>
-                Перезапустить
-            </div>
-            <div className="btn btn-one"
-                onClick={props.handlePauseResume}>
-                {props.isPaused ? "Продолжить" : "Пауза"}
+                Завершить рабочий день
             </div>
         </div>
     );

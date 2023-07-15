@@ -3,7 +3,7 @@ import "./StopWatch.css";
 import Timer from "./Timer";
 import ControlButtons from "./ControlButtons";
 
-function StopWatch() {
+function StopWatch(props) {
   const [isActive, setIsActive] = useState(false);
   const [isPaused, setIsPaused] = useState(true);
   const [elapsedTime, setElapsedTime] = useState(0);
@@ -83,11 +83,12 @@ function StopWatch() {
     localStorage.removeItem("stopWatchIsPaused");
     localStorage.removeItem("stopWatchElapsedTime");
     localStorage.removeItem("stopWatchPausedTime");
+    props.rerender() 
   };
 
   return (
     <div className="stop-watch">
-      <Timer time={isPaused ? pausedTime : elapsedTime} isPaused={isPaused} />
+      <Timer time={isPaused ? pausedTime : elapsedTime} isPaused={isPaused} user={props.user}/>
       <ControlButtons
         active={isActive}
         isPaused={isPaused}

@@ -1,0 +1,91 @@
+{
+    "id": "2",
+    "name": "test",
+    "password": "123",
+    "role": "user",
+    "isAuth": true,
+    "notifications": [],
+    "sessions": []
+}
+
+
+{
+    "data": [
+        {
+            "funnelID": "1",
+            "funnelName": "Funnel1",
+            "funnel": [
+                {
+                    "id": "e95c8985-5255-49be-8ff6-e3c644cf088f",
+                    "name": "123",
+                    "deals": [
+                        {
+                            "id": "416e0cfd-46b1-4bf7-9cf6-dac9de438ad8",
+                            "name": "123",
+                            "price": 1231293
+                        }
+                    ],
+                    "dealsSum": 1231293,
+                    "color": "#71BD5D"
+                },
+                {
+                    "id": "53f22857-7e21-490d-be8d-3bf45e12e369",
+                    "name": "Этап 1",
+                    "deals": [
+                        {
+                            "id": "36affcaa-49e2-40e1-9dfb-1be886378802",
+                            "name": "сделка 1",
+                            "price": 1000
+                        }
+                    ],
+                    "dealsSum": 1000,
+                    "color": "#3204E8"
+                },
+                {
+                    "id": "181c4e07-6be4-4159-8b30-efaca606dd30",
+                    "name": "123",
+                    "deals": [],
+                    "dealsSum": 0,
+                    "color": "#D854A3"
+                }
+            ]
+        },
+        {
+            "funnelID": "2",
+            "funnelName": "Funnel2",
+            "funnel": [
+                {
+                    "id": "e95c8985-5255-49be-8ff6-e3c644cf088f",
+                    "name": "123",
+                    "deals": [
+                        {
+                            "id": "416e0cfd-46b1-4bf7-9cf6-dac9de438ad8",
+                            "name": "123",
+                            "price": 1231293
+                        }
+                    ],
+                    "dealsSum": 1231293,
+                    "color": "#71BD5D"
+                },
+                {
+                    "id": "53f22857-7e21-490d-be8d-3bf45e12e369",
+                    "name": "Этап 1",
+                    "deals": [
+                        {
+                            "id": "36affcaa-49e2-40e1-9dfb-1be886378802",
+                            "name": "сделка 1",
+                            "price": 1000
+                        }
+                    ],
+                    "dealsSum": 1000,
+                    "color": "#3204E8"
+                }
+            ]
+        },
+        {
+            "funnelID": "3",
+            "funnelName": "Funnel3",
+            "funnel": []
+        }
+    ]
+}

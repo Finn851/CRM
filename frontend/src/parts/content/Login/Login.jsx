@@ -3,7 +3,7 @@ const Login = (props) => {
     return(
         <div className={styles.wrapper}>
             <form onSubmit={props.handleSubmit} className={styles.form}>
-                <h2 className={styles.head}>Login</h2>
+                <h2 className={styles.head}>Login CRM</h2>
                 <div className={styles.input__box}>
                     <input className={styles.input} type="text" id="name" value={props.name} onChange={(e) => props.setName(e.target.value)} required placeholder='Username' />
                     <i className={"bx bxs-user " + styles.ic}></i>

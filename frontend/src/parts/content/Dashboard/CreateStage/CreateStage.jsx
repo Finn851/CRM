@@ -4,6 +4,8 @@ import { ToastContainer, toast } from 'react-toastify';
 
 const CreateStage = (props) => {
 
+    
+
     const [formStageSubmitted, setFormStageSubmitted] = useState(false);
     const [stageName, setStageName] = useState(null)
 
@@ -55,13 +57,11 @@ const CreateStage = (props) => {
         })
         .then(response => response.json())
         .then(data => {
-          setFormStageSubmitted(true);
+            setFormStageSubmitted(true);
         })
         .catch(error => {
           console.error(error);
         });
-
-        toast.info('Создан этап')
       }
     useEffect(() => {
         if (formStageSubmitted) {
