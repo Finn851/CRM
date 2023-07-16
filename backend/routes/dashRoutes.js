@@ -38,11 +38,16 @@ router.post("/", async (req, res) => {
 router.post("/postDeal", (req, res) => {
     let d = data
     let u = users
+    const funnelID = req.body.funnelID
     const timeParts = req.body.stageNotificationDate.split(' ')
     d.data.forEach(el => {
-        if(el.id == req.body.dealStage){
-            el.deals.push({id: uuidv4(), name: req.body.dealName, price: Number(req.body.dealPrice)})
-            el.dealsSum += Number(req.body.dealPrice)
+        if (el.funnelID === funnelID){
+            el.funnel.forEach(e => {
+                if(e.id == req.body.dealStage){
+                    e.deals.push({id: uuidv4(), name: req.body.dealName, price: Number(req.body.dealPrice)})
+                    e.dealsSum += Number(req.body.dealPrice)
+                }
+            })
         }
     });
     u.users.forEach(el => {
@@ -80,21 +85,33 @@ router.post("/postDeal", (req, res) => {
 router.post("/postStage", (req, res) => {
     let d = data
     let u = users
+    const funnelID = req.body.funnelID
     const timeParts = req.body.stageNotificationDate.split(' ')
-    d.data.push({id: uuidv4(), name: req.body.stageName, deals: [], dealsSum: 0, color: req.body.stageColor})
+    d.data.forEach(el => {
+        if(el.funnelID === funnelID){
+            el.funnel.push({id: uuidv4(), name: req.body.stageName, deals: [], dealsSum: 0, color: req.body.stageColor})
+        }
+    });
     u.users.forEach(el => {
         if(el.id === req.body.userID){
             el.notifications.unshift({notificationText: req.body.stageNotificationText, time: timeParts[0], date: timeParts[1]})
         }
     });
     fs.writeFile(
+        path.join(__dirname, '..', 'data', 'data.json'),
+        JSON.stringify(d),
+        (err) => {
+            if (err) {
+                console.log(err)
+            }
+        }
+    )
+    fs.writeFile(
         path.join(__dirname, '..', 'data', 'users.json'),
         JSON.stringify(u),
         (err) => {
             if (err) {
-                reject(err)
-            } else {
-                resolve()
+                console.log(err)
             }
         }
     )

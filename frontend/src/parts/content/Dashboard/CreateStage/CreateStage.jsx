@@ -4,8 +4,6 @@ import { ToastContainer, toast } from 'react-toastify';
 
 const CreateStage = (props) => {
 
-    
-
     const [formStageSubmitted, setFormStageSubmitted] = useState(false);
     const [stageName, setStageName] = useState(null)
 
@@ -47,6 +45,7 @@ const CreateStage = (props) => {
         formData.append('stageNotificationText', 'Создан этап')
         formData.append('stageNotificationDate', getCurrentTime() + ' ' + getCurrentDate())
         formData.append('userID', localStorage.getItem('userID'))
+        formData.append('funnelID', localStorage.getItem('selectedOption'))
 
         fetch('/dashboard/postStage', {
           method: 'POST',

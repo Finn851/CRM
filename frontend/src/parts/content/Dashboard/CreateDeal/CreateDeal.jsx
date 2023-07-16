@@ -45,6 +45,7 @@ const CreateDeal = (props) => {
         formData.append('stageNotificationText', 'Создана сделка')
         formData.append('stageNotificationDate', getCurrentTime() + ' ' + getCurrentDate())
         formData.append('userID', localStorage.getItem('userID'))
+        formData.append('funnelID', localStorage.getItem('selectedOption'))
 
         fetch('/dashboard/postDeal', {
             method: 'POST',

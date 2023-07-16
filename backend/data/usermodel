@@ -89,3 +89,5 @@
         }
     ]
 }
+
+{"data":[{"funnelID":"1","funnelName":"Funnel1","funnel":[{"id":"9d31fbc0-bcd9-490d-aa67-88ea2b445965","name":"Заявка","deals":[],"dealsSum":0,"color":"#714E7F"},{"id":"8c330348-5463-47c7-a097-b4d778ce4620","name":"Реквизиты, контакты","deals":[],"dealsSum":0,"color":"#69E8CF"},{"id":"a566527a-7134-483c-ab9c-ba5156e052bf","name":"Звонок","deals":[],"dealsSum":0,"color":"#A4E740"},{"id":"e8c4fa71-a018-41ef-8642-6c8f52246f7c","name":"Запрос деталей сделки, адреса","deals":[],"dealsSum":0,"color":"#E32C43"},{"id":"73eb4fec-e6b2-4c97-9bef-6b31a71dc0a7","name":"Выиграна","deals":[],"dealsSum":0,"color":"#A8374C"}]},{"funnelID":"2","funnelName":"Funnel2","funnel":[{"id":"0588d5b9-8a4f-4e75-b965-25781e909202","name":"Открыта","deals":[],"dealsSum":0,"color":"#7B2A21"},{"id":"34877c45-c78e-4888-b569-3ac58c6486ce","name":"Выиграна","deals":[],"dealsSum":0,"color":"#B2BB97"},{"id":"31d34a33-f4eb-4d23-b5ea-6c5f68fe109d","name":"Проиграна","deals":[],"dealsSum":0,"color":"#094B54"}]},{"funnelID":"3","funnelName":"Funnel3","funnel":[]}]}
