@@ -1,5 +1,6 @@
 import styles from './Funnels.module.css'
 import { useState, useEffect } from 'react'
+import Deal from './Deal/Deal'
 
 const Funnel = (props) => {
     const Stages = props.stages
@@ -70,17 +71,6 @@ const Funnel = (props) => {
             });
     }
 
-    useEffect(() => {
-        document.querySelectorAll('#price').forEach((node) => {
-            if (!isNaN(node.textContent)) {
-                node.textContent = new Intl.NumberFormat('ru-RU', {
-                    currency: 'rub',
-                    style: 'currency',
-                }).format(node.textContent);
-            }
-        });
-    }, []);
-
     return(
         <div className={styles.dashboard__stages}>
             {stages.map(stage => <div className={styles.dashboard__stage}
@@ -94,18 +84,13 @@ const Funnel = (props) => {
                         <p className={styles.dashboard__stagePrice}><span id="price">{stage.dealsSum}</span></p>
                     </div>
                 </div>
-                {stage.deals.map(deal => <div className={styles.deal}
-                    onDragOver={(e) => dragOverHandler(e)}
+                {stage.deals.map(deal => <div onDragOver={(e) => dragOverHandler(e)}
                     onDragLeave={(e) => dragLeaveHandler(e)}
                     onDragStart={(e) => dragStartHandler(e, stage, deal)}
                     onDragEnd={(e) => dragEndHandler(e)}
                     onDrop={(e) => { dropHandler(e); }}
-                    draggable={true}
-                >
-                    <h2>{deal.name}</h2>
-                    <p className={styles.price} id="price">{deal.price}</p>
-                    <a href="/deals/{{id}}">Рассмотреть сделку</a>
-                </div>
+                    draggable={true}><Deal className={styles.deal}
+                    dealName={deal.name} dealPrice={deal.price}/></div>
                 )}
             </div>
             )}

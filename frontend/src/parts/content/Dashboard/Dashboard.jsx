@@ -22,6 +22,17 @@ const Dashboard = (props) => {
     navigate(`/dashboard/${selectedValue}`); // Перенаправляем на выбранный маршрут
   };
 
+  useEffect(() => {
+    document.querySelectorAll('#price').forEach((node) => {
+        if (!isNaN(node.textContent)) {
+            node.textContent = new Intl.NumberFormat('ru-RU', {
+                currency: 'rub',
+                style: 'currency',
+            }).format(node.textContent);
+        }
+    });
+}, []);
+
   return (
     <div className={styles.dashboard__wrapper}>
       <Options
@@ -33,7 +44,7 @@ const Dashboard = (props) => {
       />
       <Routes>
         {Funnels.map((el) => (
-          <Route key={el.funnelID} path={`/${el.funnelID}`} element={<Funnel key={el.funnelID} stages={el.funnel} funnelID={el.funnelID} />} />
+          <Route key={el.funnelID} path={`/${el.funnelID}`} element={<Funnel key={el.funnelID} stages={el.funnel} funnelID={el.funnelID} rerender={props.rerender}/>} />
         ))}
       </Routes>
     </div>

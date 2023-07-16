@@ -11,6 +11,7 @@ import Loading from './content/Loading/Loading';
 import Files from './content/Files/Files'
 import avatar from "../images/profile.jpeg";
 import StopWatch from './Functions/Timer/StopWatch';
+import Chat from './content/Chat/Chat'
 
 const Navbar = ({ rerender, data, users, handleLogout}) => {
     const navigate = useNavigate();
@@ -54,12 +55,12 @@ const Navbar = ({ rerender, data, users, handleLogout}) => {
                                 <span class="text">Notifications</span>
                             </a>
                         </NavLink>
-                        <li className="navlink">
+                        <NavLink to="/chat" className="navlink">
                             <a href="#">
                                 <span class='icon'><i class='bx bx-chat'></i></span>
                                 <span class="text">Chat</span>
                             </a>
-                        </li>
+                        </NavLink>
                         <NavLink to="/files" className="navlink">
                             <a href="#">
                                 <span class='icon'><i class='bx bx-file-blank'></i></span>
@@ -106,6 +107,7 @@ const Navbar = ({ rerender, data, users, handleLogout}) => {
                             <Route path={`/dashboard/*`} element={<Dashboard rerender={rerender} data={data} users={users} user={User} selectedOption={localStorage.getItem('selectedOption')}/>} />
                             <Route path='/revenue' element={<Revenue />} />
                             <Route path='/notifications' element={<Notifications rerender={rerender} data={data} users={users} user={User} />} />
+                            <Route path='/chat' element={<Chat />}/>
                             <Route path='/files' element={<Files />} />
                         </Routes>
                         <ToastContainer className={styles.toast} />
