@@ -68,3 +68,8 @@
     -o-user-select: none;
     user-select: none;
 }
+
+.deal_drug{
+    position: relative;
+    z-index: 0;
+}

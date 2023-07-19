@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { ToastContainer, toast } from 'react-toastify';
-
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/database';
+import 'firebase/compat/auth';
+import nextId from "react-id-generator";
 
 const CreateStage = (props) => {
-
-    const [formStageSubmitted, setFormStageSubmitted] = useState(false);
     const [stageName, setStageName] = useState(null)
 
     const getCurrentTime = () => {
@@ -38,14 +39,34 @@ const CreateStage = (props) => {
 
     function postStage(e){
         e.preventDefault();
+
+        //Create stage
+        const database = firebase.database();
+        const ref = database.ref('/data');
+        const d = props.data
+        d.forEach(el => {
+            console.log(props.funnelID)
+            if(el.funnelID === localStorage.getItem('selectedOption')){
+                el.funnel.push({
+                    id: nextId(),
+                    name: stageName,
+                    deals: [],
+                    dealsSum: 0,
+                    color: getRandomColor()
+                })
+            }
+        });
+        console.log(d)
+        ref.set(d)
+
+        //Notification
         const formData = new URLSearchParams();
-        var date = new Date();
-        formData.append('stageName', stageName)
-        formData.append('stageColor', getRandomColor())
         formData.append('stageNotificationText', 'Создан этап')
         formData.append('stageNotificationDate', getCurrentTime() + ' ' + getCurrentDate())
         formData.append('userID', localStorage.getItem('userID'))
         formData.append('funnelID', localStorage.getItem('selectedOption'))
+
+
 
         fetch('/dashboard/postStage', {
           method: 'POST',
@@ -56,19 +77,11 @@ const CreateStage = (props) => {
         })
         .then(response => response.json())
         .then(data => {
-            setFormStageSubmitted(true);
         })
         .catch(error => {
           console.error(error);
         });
       }
-    useEffect(() => {
-        if (formStageSubmitted) {
-            props.rerender()
-            window.location.reload()
-            setFormStageSubmitted(false);
-        }
-      }, [formStageSubmitted]);
     return(
         <details className='createStage'>
             <summary>

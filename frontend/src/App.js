@@ -2,22 +2,47 @@ import './App.css';
 import Navbar from './parts/Navbar';
 import { useEffect, useState } from 'react';
 import Login from './parts/content/Login/Login';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/database';
+import 'firebase/compat/auth';
+
+
+firebase.initializeApp({
+  apiKey: "AIzaSyA6a2KrgINXs48kh46ujobBHHi2G4DOBSc",
+  authDomain: "crm-app-290ad.firebaseapp.com",
+  databaseURL: "https://crm-app-290ad-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "crm-app-290ad",
+  storageBucket: "crm-app-290ad.appspot.com",
+  messagingSenderId: "417688543189",
+  appId: "1:417688543189:web:a39ee3eb737363807c675c",
+  measurementId: "G-5LNV6GKBVK"
+})
 
 const App = (props) => {
   const [data, setData] = useState(null)
   const [users, setUsers] = useState(null)
   const [auth, setAuth] = useState(null);
 
-  const fetchData = () => {
-    fetch('http://localhost:3001/dashboard/api').then((res) => res.json()).then(res => setData(res.data.data))
-  }
+  useEffect(() => {
+    const database = firebase.database();
+    const ref = database.ref('/data');
+
+    const handleData = (snapshot) => {
+      setData(snapshot.val());
+    };
+
+    ref.on('value', handleData);
+    // Очистка прослушивателя при размонтировании компонента
+    return () => {
+      ref.off('value', handleData);
+    };
+  }, []);
 
   const fetchUsers = () => {
     fetch('http://localhost:3001/users').then((res) => res.json()).then(res => setUsers(res.users.users))
   }
 
   useEffect(() => {
-    fetchData()
     fetchUsers()
   }, [])
 

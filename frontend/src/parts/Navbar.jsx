@@ -107,7 +107,7 @@ const Navbar = ({ rerender, data, users, handleLogout}) => {
                             <Route path={`/dashboard/*`} element={<Dashboard rerender={rerender} data={data} users={users} user={User} selectedOption={localStorage.getItem('selectedOption')}/>} />
                             <Route path='/revenue' element={<Revenue />} />
                             <Route path='/notifications' element={<Notifications rerender={rerender} data={data} users={users} user={User} />} />
-                            <Route path='/chat' element={<Chat />}/>
+                            <Route path='/chat' element={<Chat user={User}/>}/>
                             <Route path='/files' element={<Files />} />
                         </Routes>
                         <ToastContainer className={styles.toast} />

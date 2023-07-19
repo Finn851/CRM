@@ -1,14 +1,22 @@
 import { useState, useEffect } from "react"
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/database';
+import 'firebase/compat/auth';
+import nextId from "react-id-generator";
 
 const CreateDeal = (props) => {
 
     let Stages = props.stages
 
+    Stages.forEach(el => {
+        if(!el.deals){
+            el.deals = []
+        }
+    });
+
     const [dealName, setDealName] = useState(null)
     const [dealPrice, setDealPrice] = useState(null)
     const [dealStage, setDealStage] = useState(Stages.length ? Stages[0].id : null)
-
-    const [formDealSubmitted, setFormDealSubmitted] = useState(false);
 
     const getCurrentTime = () => {
         const date = new Date();
@@ -38,10 +46,28 @@ const CreateDeal = (props) => {
 
     function postDeal(e) {
         e.preventDefault();
+
+        //Create deal
+        const database = firebase.database();
+        const ref = database.ref('/data');
+        const d = props.data
+        d.forEach(el => {
+            if(el.funnelID === localStorage.getItem('selectedOption')){
+                el.funnel.forEach(element => {
+                    if(element.id === dealStage){
+                        element.deals.push({
+                            id: nextId('deal'),
+                            name: dealName,
+                            price: dealPrice
+                        })
+                        el.dealsSum += dealPrice
+                    }
+                });
+            }
+        });
+        ref.set(d)
+
         const formData = new URLSearchParams();
-        formData.append('dealName', dealName)
-        formData.append('dealPrice', dealPrice)
-        formData.append('dealStage', dealStage)
         formData.append('stageNotificationText', 'Создана сделка')
         formData.append('stageNotificationDate', getCurrentTime() + ' ' + getCurrentDate())
         formData.append('userID', localStorage.getItem('userID'))
@@ -56,20 +82,11 @@ const CreateDeal = (props) => {
         })
             .then(response => response.json())
             .then(data => {
-                setFormDealSubmitted(true);
             })
             .catch(error => {
                 console.error(error);
             });
     }
-
-    useEffect(() => {
-        if (formDealSubmitted) {
-            props.rerender()
-            window.location.reload()
-            setFormDealSubmitted(false);
-        }
-    }, [formDealSubmitted]);
     return(
         <details className="createDeal">
             <summary>

@@ -4,8 +4,14 @@ import styles from './Dashboard.module.css';
 import Options from './Options/Options';
 import Funnel from './Funnels/Funnel';
 
+
 const Dashboard = (props) => {
-  const Funnels = props.data;
+  const Funnels = props.data
+  Funnels.forEach(el => {
+    if(!el.funnel){
+      el.funnel = []
+    }
+  })
 
   const { funnelID } = useParams();
   const navigate = useNavigate();
@@ -33,10 +39,13 @@ const Dashboard = (props) => {
     });
 }, []);
 
+
   return (
     <div className={styles.dashboard__wrapper}>
       <Options
+        funnelID={localStorage.getItem('selectedOption')}
         stages={Stages}
+        data={props.data}
         rerender={props.rerender}
         user={props.user}
         selectedOption={selectedOption}
@@ -44,7 +53,7 @@ const Dashboard = (props) => {
       />
       <Routes>
         {Funnels.map((el) => (
-          <Route key={el.funnelID} path={`/${el.funnelID}`} element={<Funnel key={el.funnelID} stages={el.funnel} funnelID={el.funnelID} rerender={props.rerender}/>} />
+          <Route key={el.funnelID} path={`/${el.funnelID}`} element={<Funnel key={el.funnelID} stages={el.funnel} data={props.data} funnelID={el.funnelID} rerender={props.rerender}/>} />
         ))}
       </Routes>
     </div>

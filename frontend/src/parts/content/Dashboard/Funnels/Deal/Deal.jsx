@@ -4,7 +4,6 @@ import { useEffect } from "react";
 const Deal = (props) => {
     useEffect(() => {
         document.querySelectorAll('#price').forEach((node) => {
-            console.log(node)
             if (!isNaN(node.textContent)) {
                 node.textContent = new Intl.NumberFormat('ru-RU', {
                     currency: 'rub',
