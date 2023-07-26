@@ -4,7 +4,7 @@ import Deal from './Deal/Deal'
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/database';
 import 'firebase/compat/auth';
-
+import { FormattedNumber } from 'react-intl';
 
 const Funnel = (props) => {
     const Stages = props.stages
@@ -50,8 +50,8 @@ const Funnel = (props) => {
 
     function dropDealHandler(e, stage) {
         stage.deals.push(currentDeal);
-        currentStage.dealsSum = currentStage.dealsSum - currentDeal.price;
-        stage.dealsSum = stage.dealsSum + currentDeal.price;
+        currentStage.dealsSum = Number(currentStage.dealsSum) - Number(currentDeal.price);
+        stage.dealsSum = Number(stage.dealsSum) + Number(currentDeal.price);
         const currentIndex = currentStage.deals.indexOf(currentDeal);
         currentStage.deals.splice(currentIndex, 1);
         const updatedStages = stages.map((b) => {
@@ -79,6 +79,17 @@ const Funnel = (props) => {
         ref.set(data);
     }
 
+    useEffect(() => {
+        document.querySelectorAll('#price').forEach((node) => {
+          if (!isNaN(node.textContent)) {
+            node.textContent = new Intl.NumberFormat('ru-RU', {
+              style: 'currency',
+              currency: 'RUB',
+            }).format(node.textContent);
+          }
+        });
+    }, [props.data]);
+
     return(
         <div className={styles.dashboard__stages}>
             {stages.map(stage => <div className={styles.dashboard__stage}
@@ -92,13 +103,13 @@ const Funnel = (props) => {
                         <p className={styles.dashboard__stagePrice}><span id="price">{stage.dealsSum}</span></p>
                     </div>
                 </div>
-                {stage.deals.map(deal => <div className={styles.deal_drug} onDragOver={(e) => dragOverHandler(e)}
+                {stage.deals.map(deal => <div className="deal-drug" onDragOver={(e) => dragOverHandler(e)}
                     onDragLeave={(e) => dragLeaveHandler(e)}
                     onDragStart={(e) => dragStartHandler(e, stage, deal)}
                     onDragEnd={(e) => dragEndHandler(e)}
                     onDrop={(e) => { dropHandler(e); }}
                     draggable={true}><Deal className={styles.deal}
-                    dealName={deal.name} dealPrice={deal.price}/></div>
+                    dealID={deal.id} dealName={deal.name} dealPrice={deal.price}/></div>
                 )}
             </div>
             )}

@@ -12,6 +12,7 @@ import Files from './content/Files/Files'
 import avatar from "../images/profile.jpeg";
 import StopWatch from './Functions/Timer/StopWatch';
 import Chat from './content/Chat/Chat'
+import DealInfo from './content/DealInfo/DealInfo';
 
 const Navbar = ({ rerender, data, users, handleLogout}) => {
     const navigate = useNavigate();
@@ -27,6 +28,16 @@ const Navbar = ({ rerender, data, users, handleLogout}) => {
         )
     } else {
         const User = users.find(el => el.id === localStorage.getItem('userID'))
+        const deals = []
+        data.forEach(funnel => {
+            funnel.funnel.forEach(stage => {
+                if (stage.deals) {
+                    stage.deals.forEach(deal => {
+                        deals.push(deal)
+                    })
+                }
+            })
+        })
         return (
             <div className='navnavbar'>
                 <div class="sidebar">
@@ -105,6 +116,9 @@ const Navbar = ({ rerender, data, users, handleLogout}) => {
                         <Routes>
                             <Route path='/' element={<Main state={rerender} data={data} users={users} user={User} />} />
                             <Route path={`/dashboard/*`} element={<Dashboard rerender={rerender} data={data} users={users} user={User} selectedOption={localStorage.getItem('selectedOption')}/>} />
+                            {deals.map((deal) => (
+                                <Route key={deal.id} path={'/' + deal.id} element={<DealInfo deal={deal}/>}/>
+                            ))}
                             <Route path='/revenue' element={<Revenue />} />
                             <Route path='/notifications' element={<Notifications rerender={rerender} data={data} users={users} user={User} />} />
                             <Route path='/chat' element={<Chat user={User}/>}/>

@@ -17,9 +17,6 @@ const Options = (props) => {
     setSelectedOption(selectedValue);
     props.handleOptionChange(event, selectedValue);
   };
-
-  console.log(props.data)
-
   return (
     <div className={styles.dashboard__options}>
       <select
@@ -27,9 +24,7 @@ const Options = (props) => {
         value={selectedOption}
         onChange={handleOptionChange}
       >
-        <option value="1">Воронка 1</option>
-        <option value="2">Воронка 2</option>
-        <option value="3">Воронка 3</option>
+        {props.data.map(fun => (<option value={fun.funnelID}>{fun.funnelName}</option>))}
       </select>
       <CreateStage rerender={props.rerender} user={props.user} data={props.data} funnelID={props.funnelID}/>
       <CreateDeal stages={props.stages} rerender={props.rerender} data={props.data}/>

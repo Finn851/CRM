@@ -1,8 +1,12 @@
-import styles from'./Loading.module.css'
+import './Loading.css'
 const Loading = () => {
     return(
-        <div className={styles.loader}>
-            <div className={styles.loader_inner}>CRM</div>
+        <div class="loading-container">
+            <div class="loadingio-spinner-eclipse-ejw2el51w7r">
+                <div class="ldio-6ilwtce8se">
+                    <div></div>
+                </div>
+            </div>
         </div>
     )
 }

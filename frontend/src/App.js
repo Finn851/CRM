@@ -5,6 +5,7 @@ import Login from './parts/content/Login/Login';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/database';
 import 'firebase/compat/auth';
+import Loading from './parts/content/Loading/Loading';
 
 
 firebase.initializeApp({
@@ -96,21 +97,28 @@ const App = (props) => {
       body: JSON.stringify({userID: localStorage.getItem('userID'), isAuth: false}),
     })
   };
-
-  if (auth) {
-    return (
-      <div className="App">
-        {data && users && (
-          <Navbar rerender={props.rerender} data={data} users={users} handleLogout={handleLogout} />
-        )}
-      </div>
-    );
+  if(data && users){
+    if (auth) {
+      return (
+        <div className="App">
+          {data && users && (
+            <Navbar rerender={props.rerender} data={data} users={users} handleLogout={handleLogout} />
+          )}
+        </div>
+      );
+    } else {
+      return (
+        <div className="App">
+          <Login handleSubmit={handleSubmit} name={name} setName={setName} password={password} setPassword={setPassword}/>
+        </div>
+      );
+    }
   } else {
-    return (
+    return(
       <div className="App">
-        <Login handleSubmit={handleSubmit} name={name} setName={setName} password={password} setPassword={setPassword}/>
+        <Loading />
       </div>
-    );
+    )
   }
 }
 
