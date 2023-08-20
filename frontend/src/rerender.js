@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import {Routes, BrowserRouter} from 'react-router-dom';
-import { IntlProvider } from 'react-intl';
 
 const rerender = () => {
     const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -11,9 +10,7 @@ const rerender = () => {
         root.render(
             <React.StrictMode>
                 <BrowserRouter>
-                    <IntlProvider>
-                        <App rerender={rerender} />
-                    </IntlProvider>
+                    <App rerender={rerender} />
                 </BrowserRouter>
             </React.StrictMode>
         )
